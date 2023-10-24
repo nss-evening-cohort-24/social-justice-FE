@@ -1,5 +1,4 @@
 import { clientCredentials } from '../utils/client';
-// API CALLS FOR MEMBERS
 
 const endpoint = clientCredentials.databaseURL;
 
@@ -65,7 +64,7 @@ const updateMember = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getMembersByTeam = (firebaseKey) => new Promise((resolve, reject) => {
+const getMembersByMeetup = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/members.json?orderBy="team_id"&equalTo="${firebaseKey}"`, {
     method: 'GET',
     headers: {
@@ -83,5 +82,5 @@ export {
   deleteMember,
   getSingleMember,
   updateMember,
-  getMembersByTeam,
+  getMembersByMeetup,
 };
