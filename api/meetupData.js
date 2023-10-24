@@ -57,7 +57,7 @@ const deleteSingleMeetup = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateMeetup= (payload) => new Promise((resolve, reject) => {
+const updateMeetup = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/meetups/${payload.firebaseKey}.json`, {
     method: 'PATCH',
     headers: {
