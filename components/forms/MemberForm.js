@@ -19,7 +19,7 @@ const initialState = {
 
 function MemberForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [meetups, setMeetups] = useState([]);
+  const [setMeetups] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -97,7 +97,7 @@ function MemberForm({ obj }) {
         <Form.Control
           type="text"
           placeholder="Enter Email"
-          name="role"
+          name="email"
           value={formInput.email}
           onChange={handleChange}
           required
@@ -116,7 +116,7 @@ function MemberForm({ obj }) {
         />
       </FloatingLabel>
 
-      {/* Meetup SELECT */}
+      {/* Meetup SELECT
       <FloatingLabel controlId="floatingSelect" label="Meetup">
         <Form.Select
           aria-label="Meetup"
@@ -138,7 +138,7 @@ function MemberForm({ obj }) {
             ))
           }
         </Form.Select>
-      </FloatingLabel>
+      </FloatingLabel> */}
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Member</Button>
