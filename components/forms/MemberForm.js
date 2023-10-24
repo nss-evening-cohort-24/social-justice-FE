@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-duplicate-props */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
