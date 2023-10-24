@@ -1,5 +1,5 @@
-import { deleteMember, getSingleMember } from './membersData';
-import { getSingleMeetup, deleteSingleMeetup, getMeetupMembers  } from './meetupData';
+import { deleteMember, getSingleMember } from './memberData';
+import { getSingleMeetup, deleteSingleMeetup, getMeetupMembers } from './meetupData';
 
 const getMemberDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleMember(firebaseKey).then((memberObj) => {
@@ -17,7 +17,7 @@ const getMeetingDetails = async (firebaseKey) => {
 };
 
 const deleteMeetupMembersRelationship = (firebaseKey) => new Promise((resolve, reject) => {
-  getMeetingMembers(firebaseKey).then((meetupsMemberArray) => {
+  getMeetupMembers(firebaseKey).then((meetupsMemberArray) => {
     const deleteMemberPromises = meetupsMemberArray.map((member) => deleteMember(member.firebaseKey));
 
     Promise.all(deleteMemberPromises).then(() => {
