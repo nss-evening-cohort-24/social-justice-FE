@@ -24,7 +24,7 @@ export default function ViewMember() {
         </h5>
         <p>Email: {memberDetails.email}</p>
         <p>Phone: {memberDetails.phone}</p>
-        <p>Member Since: {memberDetails.phone}</p>
+        <p>Member Since: {memberDetails.memberSince}</p>
         <hr />
       </div>
     </div>

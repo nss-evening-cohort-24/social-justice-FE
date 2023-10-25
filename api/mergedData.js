@@ -3,7 +3,7 @@ import { getSingleMeetup, deleteSingleMeetup, getMeetupMembers } from './meetupD
 
 const getMemberDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleMember(firebaseKey).then((memberObj) => {
-    getSingleMeetup(memberObj.meetup_id).then((meetupObject) => {
+    getSingleMeetup(memberObj.meetupId).then((meetupObject) => {
       resolve({ ...memberObj, meetupObject });
     });
   }).catch(reject);
