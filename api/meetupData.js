@@ -2,8 +2,8 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getMeetups = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/meetups.json?orderBy="uid"&equalTo="${uid}"`, {
+const getMeetups = () => new Promise((resolve, reject) => {
+  fetch("http://localhost:5042/meetups", {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

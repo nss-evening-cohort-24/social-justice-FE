@@ -19,7 +19,7 @@ function MeetupCard({ meetupObj, onUpdate }) {
       <Card.Body>
         <Card.Title>{meetupObj.title}</Card.Title>
         <span>{meetupObj.description}</span>
-        <h6> {meetupObj.time}</h6>
+        <h6> {meetupObj.meetTime}</h6>
         <h6> {meetupObj.location}</h6>
         <h6> {meetupObj.attending}</h6>
         <br />
@@ -41,7 +41,7 @@ MeetupCard.propTypes = {
   meetupObj: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
-    time: PropTypes.string,
+    meetTime: PropTypes.string,
     image: PropTypes.string,
     firebaseKey: PropTypes.string,
     location: PropTypes.string,

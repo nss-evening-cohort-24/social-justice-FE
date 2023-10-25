@@ -22,6 +22,8 @@ function ShowMeetups() {
     getAllTheMeetups();
   }, []);
 
+// console.log("check meetup obj:", meetups);
+
   return (
     <div className="text-center my-4">
       <Link href="/team/new" passHref>
