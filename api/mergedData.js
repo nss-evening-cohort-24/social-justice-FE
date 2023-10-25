@@ -1,4 +1,4 @@
-import { deleteMember, getSingleMember } from './memberData';
+import { deleteMember, getMembers, getSingleMember } from './memberData';
 import { getSingleMeetup, deleteSingleMeetup, getMeetupMembers } from './meetupData';
 
 const getMemberDetails = (firebaseKey) => new Promise((resolve, reject) => {
@@ -26,6 +26,20 @@ const deleteMeetupMembersRelationship = (firebaseKey) => new Promise((resolve, r
   }).catch(reject);
 });
 
+const searchMembers = (searchValue, uid) => new Promise((resolve, reject) => {
+  getMembers(uid).then((memberArray) => {
+    const searchResults = memberArray.filter((member) => (
+      member.firstName.toLowerCase().includes(searchValue)
+      || member.lastName.toLowerCase().includes(searchValue)
+      || member.email.toLowerCase().includes(searchValue)
+      || member.phone.includes(searchValue)
+      || member.memberSince.includes(searchValue)
+
+    ));
+    resolve(searchResults);
+  }).catch(reject);
+});
+
 export {
-  getMemberDetails, getMeetingDetails, deleteMeetupMembersRelationship,
+  getMemberDetails, getMeetingDetails, deleteMeetupMembersRelationship, searchMembers,
 };
