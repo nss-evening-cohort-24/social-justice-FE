@@ -21,7 +21,7 @@ const getMeetups = () => new Promise((resolve, reject) => {
 });
 
 const createMeetup = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/meetups.json`, {
+  fetch("http://localhost:5042/meetup", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,8 +33,8 @@ const createMeetup = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleMeetup = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/meetups/${firebaseKey}.json`, {
+const getSingleMeetup = (id) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:5042/meetups/${id}.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -45,8 +45,8 @@ const getSingleMeetup = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteSingleMeetup = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/meetups/${firebaseKey}.json`, {
+const deleteSingleMeetup = (id) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:5042/meetups/${id}.json`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -57,9 +57,10 @@ const deleteSingleMeetup = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateMeetup = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/meetups/${payload.firebaseKey}.json`, {
-    method: 'PATCH',
+//THE FETCH METHOD FOR UPDATE ON BE IS PUT
+const updateMeetup = (id, payload) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:5042/updateMeetup${id}.json`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -70,23 +71,49 @@ const updateMeetup = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getMeetupMembers = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/meetups.json?orderBy="team_id"&equalTo="${firebaseKey}"`, {
-    method: 'GET',
+const addMemberToMeetup = (meetupId, memberId) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:5042/meetup/${meetupId}/member/${memberId}`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => {
-      if (data) {
-        resolve(Object.values(data));
-      } else {
-        resolve([]);
-      }
-    })
+    .then((data) => resolve(data))
     .catch(reject);
 });
+
+const removeMemberFromMeetup = (meetupId, memberId) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:5042/meetup/${meetupId}/removemember/${memberId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+
+// THIS ENDPOINT ISN'T NEEDED, THE BE ENDPOINT WILL RETURN A LIST OF MEMBERS WITH THE MEETUP
+// const getMeetupMembers = (firebaseKey) => new Promise((resolve, reject) => {
+//   fetch(`${endpoint}/meetups.json?orderBy="team_id"&equalTo="${firebaseKey}"`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       if (data) {
+//         resolve(Object.values(data));
+//       } else {
+//         resolve([]);
+//       }
+//     })
+//     .catch(reject);
+// });
 
 export {
   getMeetups,
@@ -94,5 +121,6 @@ export {
   getSingleMeetup,
   deleteSingleMeetup,
   updateMeetup,
-  getMeetupMembers,
+  // getMeetupMembers,
+  addMemberToMeetup,
 };
