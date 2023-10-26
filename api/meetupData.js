@@ -34,7 +34,7 @@ const createMeetup = (payload) => new Promise((resolve, reject) => {
 });
 
 const getSingleMeetup = (id) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:5042/meetups/${id}.json`, {
+  fetch(`http://localhost:5042/meetups/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const getSingleMeetup = (id) => new Promise((resolve, reject) => {
 });
 
 const deleteSingleMeetup = (id) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:5042/meetups/${id}.json`, {
+  fetch(`http://localhost:5042/meetups/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const deleteSingleMeetup = (id) => new Promise((resolve, reject) => {
 
 //THE FETCH METHOD FOR UPDATE ON BE IS PUT
 const updateMeetup = (id, payload) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:5042/updateMeetup${id}.json`, {
+  fetch(`http://localhost:5042/updateMeetup${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

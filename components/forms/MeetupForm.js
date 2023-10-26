@@ -14,6 +14,7 @@ const initialState = {
   description: '',
   imageUrl: '',
   location: '',
+  meetTime: new Date(),
 };
 
 function MeetupForm({ obj }) {
@@ -41,19 +42,17 @@ function MeetupForm({ obj }) {
     if (obj.id) {
       updateMeetup(formInput).then(() => router.push('/meetups'));
     } else {
-      const payload = { ...formInput, uid: user.uid };
-      createMeetup(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateMeetup(patchPayload).then(() => {
-          router.push('/meetups');
-        });
-      });
+      const payload = { ...formInput, organizationId: 1 };
+      console.log('create payload', payload);
+      // createMeetup(payload).then(() => {
+      //   router.push('/meetups');
+      // });
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Member</h2>
+      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Meetup</h2>
 
       {/* Title  */}
       <FloatingLabel controlId="floatingInput1" label="Meetup Title" className="mb-3">

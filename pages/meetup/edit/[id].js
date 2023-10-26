@@ -9,8 +9,10 @@ export default function EditMeetup() {
   const { id } = router.query;
 
   useEffect(() => {
-    getSingleMeetup(id).then(setEditMeetup);
+    getSingleMeetup(id)?.then(setEditMeetup);
   }, [id]);
+
+  console.log('id and obj:', id, editMeetup);
 
   return (<MeetupForm obj={editMeetup} />);
 }
