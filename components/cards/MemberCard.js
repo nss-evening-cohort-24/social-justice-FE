@@ -15,7 +15,7 @@ function MemberCard({ memberObj, onUpdate }) {
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Img variant="top" src={memberObj.image} alt={memberObj.lastName} style={{ height: '400px' }} />
+      <Card.Img variant="top" src={memberObj.imageUrl} alt={memberObj.lastName} style={{ height: '400px' }} />
       <Card.Body>
         <Card.Title>{memberObj.firstName} {memberObj.lastName}</Card.Title>
         <Card.Text>{memberObj.email}</Card.Text>
@@ -40,7 +40,7 @@ MemberCard.propTypes = {
     lastName: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
-    image: PropTypes.string,
+    imageUrl: PropTypes.string,
     memberSince: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
