@@ -59,7 +59,7 @@ const deleteSingleMeetup = (id) => new Promise((resolve, reject) => {
 
 //THE FETCH METHOD FOR UPDATE ON BE IS PUT
 const updateMeetup = (id, payload) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:5042/updateMeetup${id}`, {
+  fetch(`http://localhost:5042/updateMeetup/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const updateMeetup = (id, payload) => new Promise((resolve, reject) => {
     body: JSON.stringify(payload),
   })
     .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then(resolve)
     .catch(reject);
 });
 
