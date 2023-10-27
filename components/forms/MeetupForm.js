@@ -57,7 +57,7 @@ function MeetupForm({ obj }) {
     e.preventDefault();
     if (obj.id) {
       console.log('formInput on update:', formInput);
-      updateMeetup(formInput).then(() => router.push('/meetups'));
+      updateMeetup(formInput.id, formInput).then(() => router.push('/meetups'));
     } else {
       const payload = { ...formInput, organizationId: 1 };
       console.log('create payload', payload);
