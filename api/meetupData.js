@@ -1,9 +1,5 @@
-import { clientCredentials } from '../utils/client';
-
-const endpoint = clientCredentials.databaseURL;
-
 const getMeetups = () => new Promise((resolve, reject) => {
-  fetch("http://localhost:5042/meetups", {
+  fetch('http://localhost:5042/meetups', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -21,7 +17,7 @@ const getMeetups = () => new Promise((resolve, reject) => {
 });
 
 const createMeetup = (payload) => new Promise((resolve, reject) => {
-  fetch("http://localhost:5042/meetup", {
+  fetch('http://localhost:5042/meetup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -57,7 +53,7 @@ const deleteSingleMeetup = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-//THE FETCH METHOD FOR UPDATE ON BE IS PUT
+// THE FETCH METHOD FOR UPDATE ON BE IS PUT
 const updateMeetup = (id, payload) => new Promise((resolve, reject) => {
   fetch(`http://localhost:5042/updateMeetup/${id}`, {
     method: 'PUT',
@@ -94,7 +90,6 @@ const removeMemberFromMeetup = (meetupId, memberId) => new Promise((resolve, rej
     .then((data) => resolve(data))
     .catch(reject);
 });
-
 
 // THIS ENDPOINT ISN'T NEEDED, THE BE ENDPOINT WILL RETURN A LIST OF MEMBERS WITH THE MEETUP
 // const getMeetupMembers = (firebaseKey) => new Promise((resolve, reject) => {
