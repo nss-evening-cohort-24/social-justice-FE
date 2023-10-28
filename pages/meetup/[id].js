@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Button } from 'react-bootstrap';
 import { getSingleMeetup } from '../../api/meetupData';
 
 export default function ViewMeeting() {
@@ -25,21 +26,25 @@ export default function ViewMeeting() {
   const formattedCreateTime = formatDate(createTime);
 
   return (
-    <div className="mt-5 d-flex flex-wrap">
-      <div className="d-flex flex-column">
-        <img src={meetingDetails.image} alt={meetingDetails.title} style={{ width: '300px' }} />
+    <>
+      <div className="mt-5 d-flex flex-wrap">
+        <div className="d-flex flex-column">
+          <img src={meetingDetails.image} alt={meetingDetails.title} style={{ width: '300px' }} />
+        </div>
+        <div className="text-white ms-5 details">
+          <h5>{meetingDetails.title}</h5>
+          <p>Location: {meetingDetails.location}</p>
+          <p>Time: {formattedMeetTime}</p>
+          <p>Attending So Far: {meetingDetails.attending}</p>
+          <p>Created At: {formattedCreateTime}</p>
+          <p>
+            Description: <br />
+            {meetingDetails.description}
+          </p>
+          <hr />
+        </div>
       </div>
-      <div className="text-white ms-5 details">
-        <h5>
-          {meetingDetails.title}
-        </h5>
-        <p>Location: {meetingDetails.location}</p>
-        <p>Time: {formattedMeetTime}</p>
-        <p>Attending So Far: {meetingDetails.attending}</p>
-        <p>Created At: {formattedCreateTime}</p>
-        <p>Description: <br />{meetingDetails.description}</p>
-        <hr />
-      </div>
-    </div>
+      <Button>Add Member to Meetup</Button>
+    </>
   );
 }

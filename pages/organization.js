@@ -19,7 +19,6 @@ export default function ShowOrg() {
     <><div className="text-center my-4"><h1>Our Organization</h1></div>
       <div className="text-center my-4">
         <div className="d-flex flex-wrap">
-          {/* TODO: map over members here using MemberCard component */}
           {orgs.map((org) => (
             <OrgCard key={org.firebaseKey} orgObj={org} onUpdate={getOrg} />
           ))}
