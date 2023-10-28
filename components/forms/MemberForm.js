@@ -8,26 +8,24 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createMember, updateMember } from '../../api/memberData';
-import { getMeetups } from '../../api/meetupData';
+// import { getMeetups } from '../../api/meetupData';
 
 const initialState = {
   firstName: '',
   lastName: '',
   email: '',
   phone: '',
-  image: '',
+  imageUrl: '',
 };
 
 function MemberForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [setMeetups] = useState([]);
+  // const [members, setMembers] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    getMeetups(user.uid).then(setMeetups);
-
-    if (obj.firebaseKey) setFormInput(obj);
+    if (obj.id) setFormInput(obj);
   }, [obj, user]);
 
   const handleChange = (e) => {
@@ -40,22 +38,23 @@ function MemberForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
-      updateMember(formInput).then(() => router.push('/members'));
+    console.warn(formInput);
+    if (obj.id) {
+      updateMember(formInput)
+        .then(() => router.push('/members'));
     } else {
-      const payload = { ...formInput, uid: user.uid };
-      createMember(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateMember(patchPayload).then(() => {
+      const payload = { ...formInput, uid: user.uid, organizationId: 1 };
+      console.log('member payload:', payload);
+      createMember(payload)
+        .then(() => {
           router.push('/members');
         });
-      });
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Member</h2>
+      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Member</h2>
 
       {/* firstName INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="First Name" className="mb-3">
@@ -86,8 +85,8 @@ function MemberForm({ obj }) {
         <Form.Control
           type="url"
           placeholder="Enter an image url"
-          name="image"
-          value={formInput.image}
+          name="imageUrl"
+          value={formInput.imageUrl}
           onChange={handleChange}
           required
         />
@@ -142,7 +141,7 @@ function MemberForm({ obj }) {
       </FloatingLabel> */}
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Member</Button>
+      <Button type="submit">{obj.id ? 'Update' : 'Create'} Member</Button>
     </Form>
   );
 }
@@ -153,8 +152,8 @@ MemberForm.propTypes = {
     lastName: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
-    image: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    imageUrl: PropTypes.string,
+    id: PropTypes.number,
   }),
 };
 
