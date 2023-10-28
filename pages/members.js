@@ -3,17 +3,14 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getMembers } from '../api/memberData';
-import { useAuth } from '../utils/context/authContext';
 import MemberCard from '../components/cards/MemberCard';
 // import SearchBar from '../components/search/SearchBar';
 
 function ShowMembers() {
   const [members, setMembers] = useState([]);
 
-  const { user } = useAuth();
-
   const getAllTheMembers = () => {
-    getMembers(user.uid).then(setMembers);
+    getMembers().then(setMembers);
   };
 
   useEffect(() => {
@@ -28,7 +25,7 @@ function ShowMembers() {
         </Link>
         <div className="d-flex flex-wrap">
           {members.map((member) => (
-            <MemberCard key={member.firebaseKey} memberObj={member} onUpdate={getAllTheMembers} />
+            <MemberCard key={member.id} memberObj={member} onUpdate={getAllTheMembers} />
           ))}
         </div>
       </div>
