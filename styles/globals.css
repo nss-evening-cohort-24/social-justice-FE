@@ -1,11 +1,11 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet');
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Agbalumo', sans-serif;
 }
 
 a {
@@ -18,5 +18,43 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: black;
+}
+
+div.card-title.h5 {
+  color: rgb(33, 194, 235);
+  font-size: 36px;
+}
+
+p.card-text {
+  color: black;
+  font-size: 24px;
+}
+
+a.navbar-brand {
+  font-size: 30px;
+}
+
+#profile-page {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+nav{
+  font-size: 20px;
+}
+
+a.nav-link {
+  display: flex;
+  padding: 0px;
+  align-items: center;
+  margin: 8px;
+}
+
+#signout-btn {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  margin-left: 100px;
 }
