@@ -46,17 +46,11 @@ const createMember = (payload) => new Promise((resolve, reject) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application.json',
     },
     body: JSON.stringify(payload),
   })
-    .then(async (res) => {
-      let data;
-      if (res.ok) {
-        data = await res.json();
-        resolve(data);
-      }
-    })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
