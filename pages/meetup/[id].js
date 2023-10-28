@@ -3,16 +3,32 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import { getSingleMeetup } from '../../api/meetupData';
+import { useAuth } from '../../utils/context/authContext';
+import { checkUser } from '../../api/memberData';
 
 export default function ViewMeeting() {
   const [meetingDetails, setMeetingDetails] = useState({});
+  const [member, setMember] = useState();
   const router = useRouter();
+  const { user } = useAuth();
 
   const { id } = router.query;
 
   useEffect(() => {
     getSingleMeetup(id)?.then(setMeetingDetails);
   }, [id]);
+
+  useEffect(() => {
+    checkUser(user.uid)?.then(setMember);
+  }, [user.uid]);
+
+  console.log('checkuser member:', member, member?.id);
+  console.log('meetup:', meetingDetails);
+
+  const meetupMemberId = meetingDetails?.members?.find((m) => (
+    m?.id === member[0]?.id
+  ));
+  console.log('check meetup member list id:', meetupMemberId);
 
   const meetTime = new Date(meetingDetails.meetTime);
   const createTime = new Date(meetingDetails.dateCreated);
@@ -44,7 +60,7 @@ export default function ViewMeeting() {
           <hr />
         </div>
       </div>
-      <Button>Add Member to Meetup</Button>
+      {meetupMemberId ? null : <Button>Add Member to Meetup</Button>}
     </>
   );
 }
