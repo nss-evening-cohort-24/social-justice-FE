@@ -14,6 +14,7 @@ const initialState = {
   description: '',
   imageUrl: '',
   location: '',
+  meetTime: '',
 };
 
 function MeetupForm({ obj }) {
@@ -30,30 +31,45 @@ function MeetupForm({ obj }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    if (name === 'meetTime') {
+      const validDateFormat = /^\d{4}-\d{2}-\d{2}$/;
+      if (validDateFormat.test(value)) {
+        setFormInput((prevState) => ({
+          ...prevState,
+          [name]: new Date(value),
+        }));
+      } else {
+        setFormInput((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      }
+    } else {
+      setFormInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
-      updateMeetup(formInput).then(() => router.push('/meetups'));
+      console.log('formInput on update:', formInput);
+      updateMeetup(formInput.id, formInput).then(() => router.push('/meetups'));
     } else {
-      const payload = { ...formInput, uid: user.uid };
-      createMeetup(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateMeetup(patchPayload).then(() => {
-          router.push('/meetups');
-        });
+      const payload = { ...formInput, organizationId: 1 };
+      console.log('create payload', payload);
+      createMeetup(payload).then(() => {
+        router.push('/meetups');
       });
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Member</h2>
+      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Meetup</h2>
 
       {/* Title  */}
       <FloatingLabel controlId="floatingInput1" label="Meetup Title" className="mb-3">
@@ -98,6 +114,18 @@ function MeetupForm({ obj }) {
           placeholder="Enter Location"
           name="location"
           value={formInput.location}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      {/* meetTime  */}
+      <FloatingLabel controlId="floatingInput3" label="Meeting Time" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter Date yyyy-dd-mm"
+          name="meetTime"
+          value={formInput.meetTime || 'yyyy-dd-mm'}
           onChange={handleChange}
           required
         />

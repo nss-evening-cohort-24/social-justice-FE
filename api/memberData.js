@@ -1,4 +1,4 @@
-const dbUrl = 'https://localhost:7040';
+const dbUrl = 'http://localhost:5042';
 
 const getMembers = () => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/members`, {
@@ -8,7 +8,13 @@ const getMembers = () => new Promise((resolve, reject) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
     .catch(reject);
 });
 
@@ -19,7 +25,6 @@ const deleteMember = (id) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json())
     .then((data) => resolve((data)))
     .catch(reject);
 });
@@ -41,17 +46,23 @@ const createMember = (payload) => new Promise((resolve, reject) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application.json',
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then(async (res) => {
+      let data;
+      if (res.ok) {
+        data = await res.json();
+        resolve(data);
+      }
+    })
     .catch(reject);
 });
 
 const updateMember = (payload) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/members/${payload.id}`, {
-    method: 'PATCH',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
