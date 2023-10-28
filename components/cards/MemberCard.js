@@ -9,7 +9,7 @@ import { deleteMember } from '../../api/memberData';
 function MemberCard({ memberObj, onUpdate }) {
   const deleteThisMember = () => {
     if (window.confirm(`Delete ${memberObj.email}?`)) {
-      deleteMember(memberObj.firebaseKey).then(() => onUpdate());
+      deleteMember(memberObj.id).then(() => onUpdate());
     }
   };
 
@@ -20,10 +20,10 @@ function MemberCard({ memberObj, onUpdate }) {
         <Card.Title>{memberObj.firstName} {memberObj.lastName}</Card.Title>
         <Card.Text>{memberObj.email}</Card.Text>
         <Card.Text>{memberObj.phone}</Card.Text>
-        <Link href={`/member/${memberObj.firebaseKey}`} passHref>
+        <Link href={`/member/${memberObj.id}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
-        <Link href={`/member/edit/${memberObj.firebaseKey}`} passHref>
+        <Link href={`/member/edit/${memberObj.id}`} passHref>
           <Button variant="info">EDIT</Button>
         </Link>
         <Button variant="danger" onClick={deleteThisMember} className="m-2">
@@ -42,7 +42,7 @@ MemberCard.propTypes = {
     phone: PropTypes.string,
     imageUrl: PropTypes.string,
     memberSince: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    id: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

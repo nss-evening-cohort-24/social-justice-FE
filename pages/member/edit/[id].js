@@ -7,12 +7,12 @@ function EditMember() {
   const [editItem, setEditItem] = useState({});
   const router = useRouter();
   // TODO: grab the firebasekey
-  const { firebaseKey } = router.query;
+  const { id } = router.query;
 
   // TODO: make a call to the API to get the member data
   useEffect(() => {
-    getSingleMember(firebaseKey).then(setEditItem);
-  }, [firebaseKey]);
+    getSingleMember(id).then(setEditItem);
+  }, [id]);
 
   // TODO: pass object to form
   return (<MemberForm obj={editItem} />);
