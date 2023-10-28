@@ -9,28 +9,22 @@ import MeetupCard from '../components/cards/MeetupCard';
 function ShowMeetups() {
   const [meetups, setMeetups] = useState([]);
 
-  // TODO: Get user ID using useAuth Hook
   const { user } = useAuth();
 
-  // TODO: create a function that makes the API call to get all the teams
   const getAllTheMeetups = () => {
     getMeetups(user.uid).then(setMeetups);
   };
 
-  // TODO: make the call to the API to get all the teams on component render
   useEffect(() => {
     getAllTheMeetups();
   }, []);
 
-  console.log('check meetup obj:', meetups);
-
   return (
     <div className="text-center my-4">
-      <Link href="/team/new" passHref>
+      <Link href="/meetup/new" passHref>
         <Button>Add A Meetup</Button>
       </Link>
       <div className="d-flex flex-wrap">
-        {/* TODO: map over teams here using teamCard component */}
         {meetups.map((meetup) => (
           <MeetupCard key={meetup.id} meetupObj={meetup} onUpdate={getAllTheMeetups} />
         ))}
