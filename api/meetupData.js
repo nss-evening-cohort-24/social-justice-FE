@@ -123,4 +123,5 @@ export {
   updateMeetup,
   // getMeetupMembers,
   addMemberToMeetup,
+  removeMemberFromMeetup,
 };
