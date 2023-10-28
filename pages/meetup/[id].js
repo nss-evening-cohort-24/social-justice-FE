@@ -7,11 +7,11 @@ export default function ViewMeeting() {
   const [meetingDetails, setMeetingDetails] = useState({});
   const router = useRouter();
 
-  const { firebaseKey } = router.query;
+  const { id } = router.query;
 
   useEffect(() => {
-    getMeetingDetails(firebaseKey).then(setMeetingDetails);
-  }, [firebaseKey]);
+    getMeetingDetails(id).then(setMeetingDetails);
+  }, [id]);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
