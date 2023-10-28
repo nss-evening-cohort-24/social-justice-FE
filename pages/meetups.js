@@ -22,6 +22,8 @@ function ShowMeetups() {
     getAllTheMeetups();
   }, []);
 
+  console.log('check meetup obj:', meetups);
+
   return (
     <div className="text-center my-4">
       <Link href="/team/new" passHref>
@@ -30,7 +32,7 @@ function ShowMeetups() {
       <div className="d-flex flex-wrap">
         {/* TODO: map over teams here using teamCard component */}
         {meetups.map((meetup) => (
-          <MeetupCard key={meetup.firebaseKey} meetupObj={meetup} onUpdate={getAllTheMeetups} />
+          <MeetupCard key={meetup.id} meetupObj={meetup} onUpdate={getAllTheMeetups} />
         ))}
       </div>
     </div>

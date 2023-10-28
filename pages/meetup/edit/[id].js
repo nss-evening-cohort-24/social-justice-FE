@@ -6,11 +6,11 @@ import MeetupForm from '../../../components/forms/MeetupForm';
 export default function EditMeetup() {
   const [editMeetup, setEditMeetup] = useState({});
   const router = useRouter();
-  const { firebaseKey } = router.query;
+  const { id } = router.query;
 
   useEffect(() => {
-    getSingleMeetup(firebaseKey).then(setEditMeetup);
-  }, [firebaseKey]);
+    getSingleMeetup(id).then(setEditMeetup);
+  }, [id]);
 
   return (<MeetupForm obj={editMeetup} />);
 }

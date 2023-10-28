@@ -12,7 +12,7 @@ import { getMeetups, updateMeetup, createMeetup } from '../../api/meetupData';
 const initialState = {
   title: '',
   description: '',
-  image: '',
+  imageUrl: '',
   location: '',
 };
 
@@ -25,7 +25,7 @@ function MeetupForm({ obj }) {
   useEffect(() => {
     getMeetups(user.uid).then(setMeetups);
 
-    if (obj.firebaseKey) setFormInput(obj);
+    if (obj.id) setFormInput(obj);
   }, [obj, user]);
 
   const handleChange = (e) => {
@@ -38,7 +38,7 @@ function MeetupForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (obj.id) {
       updateMeetup(formInput).then(() => router.push('/meetups'));
     } else {
       const payload = { ...formInput, uid: user.uid };
@@ -53,7 +53,7 @@ function MeetupForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Member</h2>
+      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Member</h2>
 
       {/* Title  */}
       <FloatingLabel controlId="floatingInput1" label="Meetup Title" className="mb-3">
@@ -84,8 +84,8 @@ function MeetupForm({ obj }) {
         <Form.Control
           type="url"
           placeholder="Enter an image url"
-          name="image"
-          value={formInput.image}
+          name="imageUrl"
+          value={formInput.imageUrl}
           onChange={handleChange}
           required
         />
@@ -104,7 +104,7 @@ function MeetupForm({ obj }) {
       </FloatingLabel>
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Meetup</Button>
+      <Button type="submit">{obj.id ? 'Update' : 'Create'} Meetup</Button>
     </Form>
   );
 }
@@ -114,8 +114,8 @@ MeetupForm.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     location: PropTypes.string,
-    image: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    imageUrl: PropTypes.string,
+    id: PropTypes.number,
   }),
 };
 
