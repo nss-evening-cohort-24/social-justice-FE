@@ -26,7 +26,7 @@ export default function ViewMeeting() {
   console.log('meetup:', meetingDetails);
 
   const meetupMemberId = meetingDetails?.members?.find((m) => (
-    m?.id === member[0]?.id
+    m?.id === member?.id
   ));
   console.log('check meetup member list id:', meetupMemberId);
 
@@ -60,7 +60,7 @@ export default function ViewMeeting() {
           <hr />
         </div>
       </div>
-      {meetupMemberId ? null : <Button>Add Member to Meetup</Button>}
+      {meetupMemberId ? null : <Button>Join Meetup</Button>}
     </>
   );
 }
