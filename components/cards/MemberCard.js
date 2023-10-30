@@ -42,7 +42,7 @@ MemberCard.propTypes = {
     phone: PropTypes.string,
     imageUrl: PropTypes.string,
     memberSince: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
