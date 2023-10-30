@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button } from 'react-bootstrap';
 import { getSingleMeetup } from '../../api/meetupData';
 import { useAuth } from '../../utils/context/authContext';
 import { checkUser } from '../../api/memberData';
+import AddMemberToMeetup from '../../components/buttons/AddMemberToMeetup';
 
 export default function ViewMeeting() {
   const [meetingDetails, setMeetingDetails] = useState({});
@@ -60,7 +60,7 @@ export default function ViewMeeting() {
           <hr />
         </div>
       </div>
-      {meetupMemberId ? null : <Button>Join Meetup</Button>}
+      {meetupMemberId ? null : <AddMemberToMeetup meetupId={meetingDetails?.id} memberId={member?.id} />}
     </>
   );
 }
