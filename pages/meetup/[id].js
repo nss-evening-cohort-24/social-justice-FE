@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { getSingleMeetup } from '../../api/meetupData';
 import { useAuth } from '../../utils/context/authContext';
 import { checkUser } from '../../api/memberData';
 import AddMemberToMeetup from '../../components/buttons/AddMemberToMeetup';
+import RemoveMemberMeetup from '../../components/buttons/RemoveMemberFromMeetup';
 
 export default function ViewMeeting() {
   const [meetingDetails, setMeetingDetails] = useState({});
@@ -30,8 +32,8 @@ export default function ViewMeeting() {
   ));
   console.log('check meetup member list id:', meetupMemberId);
 
-  const meetTime = new Date(meetingDetails.meetTime);
-  const createTime = new Date(meetingDetails.dateCreated);
+  const meetTime = new Date(meetingDetails?.meetTime);
+  const createTime = new Date(meetingDetails?.dateCreated);
   const formatDate = (date) => {
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const dd = String(date.getDate()).padStart(2, '0');
@@ -45,22 +47,32 @@ export default function ViewMeeting() {
     <>
       <div className="mt-5 d-flex flex-wrap">
         <div className="d-flex flex-column">
-          <img src={meetingDetails.image} alt={meetingDetails.title} style={{ width: '300px' }} />
+          <img src={meetingDetails?.image} alt={meetingDetails?.title} style={{ width: '300px' }} />
         </div>
         <div className="text-white ms-5 details">
-          <h5>{meetingDetails.title}</h5>
-          <p>Location: {meetingDetails.location}</p>
+          <h5>{meetingDetails?.title}</h5>
+          <p>Location: {meetingDetails?.location}</p>
           <p>Time: {formattedMeetTime}</p>
-          <p>Attending So Far: {meetingDetails.attending}</p>
+          <p>Attending So Far: {meetingDetails?.attending}</p>
           <p>Created At: {formattedCreateTime}</p>
           <p>
             Description: <br />
-            {meetingDetails.description}
+            {meetingDetails?.description}
           </p>
           <hr />
         </div>
       </div>
-      {meetupMemberId ? null : <AddMemberToMeetup meetupId={meetingDetails?.id} memberId={member?.id} />}
+      {meetupMemberId ? <RemoveMemberMeetup meetupId={meetingDetails?.id} memberId={member?.id} /> : <AddMemberToMeetup meetupId={meetingDetails?.id} memberId={member?.id} />}
+      {meetingDetails?.members?.map((m) => (
+        <>
+          <ul>
+            <li>{`Member:  ${m.firstName} ${m.lastName}`}</li>
+            <li>{`Email: ${m.email}`}</li>
+            <li>{m.id === meetupMemberId ? <RemoveMemberMeetup /> : null}</li>
+            <li><Link href={`/member/${m.id}`}>Member Details</Link></li>
+          </ul>
+        </>
+      ))}
     </>
   );
 }
