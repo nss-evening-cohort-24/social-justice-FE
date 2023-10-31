@@ -55,7 +55,7 @@ MeetupCard.propTypes = {
     imageUrl: PropTypes.string,
     id: PropTypes.number,
     location: PropTypes.string,
-    attending: PropTypes.bool,
+    attending: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
