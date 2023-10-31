@@ -1,21 +1,18 @@
+import { useEffect, useState } from 'react';
+import MemberForm from '../components/forms/MemberForm';
+import Welcome from '../components/Welcome';
+import { checkUser } from '../api/memberData';
 import { useAuth } from '../utils/context/authContext';
 
-function Home() {
-  const { user } = useAuth();
+export default function Home() {
+  const [member, setMember] = useState();
 
+  const { user } = useAuth();
+  useEffect(() => {
+    checkUser(user.uid)?.then(setMember);
+  }, [user.uid]);
+  console.log(member);
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
-    </div>
+    member ? <Welcome /> : <MemberForm />
   );
 }
-
-export default Home;
