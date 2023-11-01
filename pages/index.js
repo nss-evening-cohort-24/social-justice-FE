@@ -9,7 +9,7 @@ export default function Home() {
 
   const { user } = useAuth();
   useEffect(() => {
-    checkUser(user.uid)?.then(setMember);
+    checkUser(user.uid)?.then(setMember).catch(setMember(null));
   }, [user.uid]);
   console.log(member);
   return (
