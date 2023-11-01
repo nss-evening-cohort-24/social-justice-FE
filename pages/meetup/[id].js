@@ -62,17 +62,45 @@ export default function ViewMeeting() {
           <hr />
         </div>
       </div>
-      {meetupMemberId ? <RemoveMemberMeetup meetupId={meetingDetails?.id} memberId={member?.id} /> : <AddMemberToMeetup meetupId={meetingDetails?.id} memberId={member?.id} />}
-      {meetingDetails?.members?.map((m) => (
-        <>
-          <ul>
+      {!meetupMemberId ? <AddMemberToMeetup meetupId={meetingDetails?.id} memberId={member?.id} /> : null }
+
+      {/* {meetingDetails?.members?.map((m) => (
+        <div key={m.id}>
+          <ul className="text-white">
             <li>{`Member:  ${m.firstName} ${m.lastName}`}</li>
             <li>{`Email: ${m.email}`}</li>
             <li>{m.id === meetupMemberId ? <RemoveMemberMeetup /> : null}</li>
             <li><Link href={`/member/${m.id}`}>Member Details</Link></li>
           </ul>
-        </>
-      ))}
+        </div>
+      ))} */}
+
+      <table className="text-white table">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Email</th>
+            <th>Leave Meetup</th>
+            <th>Member Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {meetingDetails?.members?.map((m) => (
+            <tr key={m.id}>
+              <td className="cell">{`${m?.firstName} ${m?.lastName}`}</td>
+              <td className="cell">{m?.email}</td>
+              <td className="cell">
+                {m?.id === meetupMemberId?.id ? (
+                  <RemoveMemberMeetup meetupId={meetingDetails?.id} memberId={m?.id} />
+                ) : null}
+              </td>
+              <td className="cell">
+                <Link href={`/member/${m?.id}`}>View Member</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
