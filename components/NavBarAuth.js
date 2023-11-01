@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Navbar, Container, Nav, Button,
@@ -8,8 +8,18 @@ import {
 import { signOut } from '../utils/auth';
 import SearchBar from './SearchBar';
 import home from '../images/home.png';
+import CreateMemberBtn from './buttons/CreateMemberBtn';
+import { useAuth } from '../utils/context/authContext';
+import { checkUser } from '../api/memberData';
 
 export default function NavBarAuth() {
+  const [member, setMember] = useState();
+
+  const { user } = useAuth();
+  useEffect(() => {
+    checkUser(user.uid)?.then(setMember);
+  }, [user.uid]);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -30,9 +40,7 @@ export default function NavBarAuth() {
           <Link passHref href="/members">
             <Nav.Link>Members</Nav.Link>
           </Link>
-          <Link passHref href="/member/new">
-            <Nav.Link>Create Member</Nav.Link>
-          </Link>
+          {member ? null : <CreateMemberBtn />}
         </Nav>
         <SearchBar />
         <Button variant="danger" id="signout-btn" onClick={signOut}>Sign Out</Button>
