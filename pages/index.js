@@ -11,7 +11,6 @@ export default function Home() {
   useEffect(() => {
     checkUser(user.uid)?.then(setMember).catch(setMember(null));
   }, [user.uid]);
-  console.log(member);
   return (
     member ? <Welcome /> : <MemberForm />
   );
