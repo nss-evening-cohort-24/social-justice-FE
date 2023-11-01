@@ -87,8 +87,14 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
       Accept: 'application/json',
     },
   })
-    .then((resp) => resolve(resp?.json()))
-    .catch(reject);
+    .then((resp) => {
+      if (resp.ok) {
+        resolve(resp.json());
+      } else {
+        resolve(null);
+      }
+    })
+    .catch((error) => reject(error));
 });
 
 export {
