@@ -9,7 +9,7 @@ import { deleteMember } from '../../api/memberData';
 function MemberCard({ memberObj, onUpdate }) {
   const deleteThisMember = () => {
     if (window.confirm(`Delete ${memberObj.email}?`)) {
-      deleteMember(memberObj.id).then(() => onUpdate());
+      deleteMember(memberObj.id).then(() => onUpdate()).then(() => window.location.reload());
     }
   };
 
