@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
+import ReactDatePicker from 'react-datepicker';
 import { useAuth } from '../../utils/context/authContext';
 import { getMeetups, updateMeetup, createMeetup } from '../../api/meetupData';
 
@@ -30,21 +31,13 @@ function MeetupForm({ obj }) {
   }, [obj, user]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target || e; // Handle both input changes and date picker changes
 
     if (name === 'meetTime') {
-      const validDateFormat = /^\d{4}-\d{2}-\d{2}$/;
-      if (validDateFormat.test(value)) {
-        setFormInput((prevState) => ({
-          ...prevState,
-          [name]: new Date(value),
-        }));
-      } else {
-        setFormInput((prevState) => ({
-          ...prevState,
-          [name]: value,
-        }));
-      }
+      setFormInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     } else {
       setFormInput((prevState) => ({
         ...prevState,
@@ -124,12 +117,19 @@ function MeetupForm({ obj }) {
 
       {/* meetTime  */}
       <FloatingLabel controlId="floatingInput3" label="Meeting Time" className="mb-3">
-        <Form.Control
+        {/* <Form.Control
           type="text"
           placeholder="YYYY-DD-MM"
           name="meetTime"
-          value={formInput.meetTime}
+          value={formInput.meetTime || 'yyyy-dd-mm'}
           onChange={handleChange}
+          required
+        /> */}
+        <ReactDatePicker
+          selected={formInput.meetTime}
+          onChange={(date) => handleChange({ target: { name: 'meetTime', value: date } })}
+          dateFormat="yyyy-MM-dd"
+          placeholderText="Select a date"
           required
         />
       </FloatingLabel>
