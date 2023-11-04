@@ -1,11 +1,24 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet');
 
+@font-face {
+  font-family: brushed;
+  src: url("Brushed.ttf") format("truetype");
+}
+@font-face {
+  font-family: barlow;
+  src: url("BarlowCondensed-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: dosis;
+  src: url("Dosis-Regular.ttf") format("truetype");
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Optima', sans-serif;
+  font-family: barlow;
 }
 
 a {
@@ -19,11 +32,6 @@ a {
 
 body {
   background-color: white;
-}
-
-@font-face {
-  font-family: brushed;
-  src: url("Brushed.ttf") format("truetype");
 }
 
 .navbar-collapse {
@@ -102,6 +110,7 @@ a.nav-link {
   position: relative;
 }
 
+/* ORGANIZATION PAGE */
 .blueImg {
   position: absolute;
   left: 25px;
@@ -133,6 +142,7 @@ a.nav-link {
   max-width: 75%;
 }
 
+/* MEETUPS PAGE */
 #meet-card {
   margin: 25px 0 25px 50px;
   display: flex;
@@ -167,6 +177,7 @@ a.nav-link {
   opacity: 0.85;
 }
 
+/* MEMBERS PAGE */
 .newMemPG {
   top: 100px;
   right: 50px;
@@ -194,6 +205,7 @@ a.nav-link {
   opacity: 0.55;
 }
 
+/* MEETUP FORM PAGE */
 .meet-form-text {
   margin: 30px;
   font-family: brushed;
@@ -222,6 +234,8 @@ a.nav-link {
   opacity: 0.65;
   width: 45%;
 }
+
+/* MEMBER FORM PAGE */
 .mem-form {
   padding: 1px;
 }
@@ -236,4 +250,19 @@ a.nav-link {
 }
 .createMem {
   margin: 30px;
+}
+
+/* MEETUP DETAILS */
+.img {
+  margin: 40px;
+}
+.details {
+  padding: 20px;
+}
+.addMember {
+  margin: 30px;
+}
+#howard {
+  width: 100%;
+  height: 100px;
 }

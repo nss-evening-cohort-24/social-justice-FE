@@ -13,18 +13,28 @@ export default function ViewMember() {
     getSingleMember(id).then(setMemberDetails);
   }, [id]);
 
+  const joinedSince = new Date(memberDetails.memberSince);
+  const formatDate = (date) => {
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    return `${mm}-${dd}-${yyyy}`;
+  };
+  const formattedMemberTime = formatDate(joinedSince);
+
   return (
     <div className="mt-5 d-flex flex-wrap">
-      <div className="d-flex flex-column">
+      <div className="img d-flex flex-column">
         <img src={memberDetails.imageUrl} alt={memberDetails.email} style={{ width: '300px' }} />
       </div>
       <div className="text-black ms-5 details">
-        <h5>
+        <h3>
           {memberDetails.firstName} {memberDetails.lastName}
-        </h5>
+        </h3>
+        <br />
         <p>Email: {memberDetails.email}</p>
         <p>Phone: {memberDetails.phone}</p>
-        <p>Member Since: {memberDetails.memberSince}</p>
+        <p>Member Since: {formattedMemberTime}</p>
         <hr />
       </div>
     </div>
