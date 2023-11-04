@@ -5,7 +5,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Agbalumo', sans-serif;
+  font-family: 'Optima', sans-serif;
 }
 
 a {
@@ -18,18 +18,58 @@ a {
 }
 
 body {
-  background-color: black;
+  background-color: white;
 }
 
-div.card-title.h5 {
+@font-face {
+  font-family: brushed;
+  src: url("Brushed.ttf") format("truetype");
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: center;
+}
+.bi-house {
+  width: 35px;
+  height: 35px;
+}
+.navMeet {
+  margin: 0 18px;
+}
+.navNewMeet {
+  margin: 0 18px;
+}
+.navMem {
+  margin: 0 18px;
+}
+.navNewMem {
+  margin: 0 18px;
+}
+.navSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signOut {
+  margin: 0 18px;
+  display: flex;
+  justify-content: right;
+  align-content: center;
+  height: 45px;
+}
+
+/* div.card-title.h5 {
   color: rgb(33, 194, 235);
-  font-size: 36px;
 }
 
 p.card-text {
-  color: black;
   font-size: 24px;
-}
+} */
+
+/* nav{
+  font-size: 20px;
+} */
 
 a.navbar-brand {
   font-size: 30px;
@@ -39,10 +79,6 @@ a.navbar-brand {
   display: flex;
   align-items: center;
   color: white;
-}
-
-nav{
-  font-size: 20px;
 }
 
 a.nav-link {
@@ -56,5 +92,148 @@ a.nav-link {
   display: flex;
   justify-content: end;
   align-items: end;
-  margin-left: 100px;
+}
+
+.header {
+  font-family: brushed;
+  font-size: 150px;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.blueImg {
+  position: absolute;
+  left: 25px;
+  height: 150%;
+  width: 120px;
+  background-color: rgb(128,144,171);
+}
+#noXimg {
+  position: absolute;
+  height: 150%;
+  width: 57%;
+  right: 0;
+  opacity: 0.55;
+}
+#org-card {
+  margin: 25px 0 25px 50px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+.orgImg {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.org-card-body {
+  flex-flow: row wrap;
+  max-width: 75%;
+}
+
+#meet-card {
+  margin: 25px 0 25px 50px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.meet-text {
+  width: 75%;
+}
+.meet-buttons {
+  position: absolute;
+  right: 50px;
+}
+.newMeetPG {
+  top: 100px;
+  right: 50px;
+  position: absolute;
+}
+.redImg {
+  position: absolute;
+  left: 130px;
+  height: 150%;
+  width: 120px;
+  background-color:rgb(195,107,94);
+}
+#genWallimg {
+  position: absolute;
+  height: 150%;
+  width: 64%;
+  right: 215px;
+  opacity: 0.85;
+}
+
+.newMemPG {
+  top: 100px;
+  right: 50px;
+  position: absolute;
+}
+.yellowImg {
+  position: absolute;
+  right: 130px;
+  height: 150%;
+  width: 120px;
+  background-color: rgb(199,185,157);
+}
+.greenImg {
+  position: absolute;
+  right: 300px;
+  height: 150%;
+  width: 50px;
+  background-color: rgb(131,152,140);
+}
+#postLayer {
+  position: absolute;
+  height: 150%;
+  width: 64%;
+  left: 85px;
+  opacity: 0.55;
+}
+
+.meet-form-text {
+  margin: 30px;
+  font-family: brushed;
+}
+.mb-3 {
+  margin: 30px;
+  width: 50%;
+}
+.newMeet {
+  margin: 30px;
+  position: absolute;
+}
+.meet-form {
+  padding: 1px;
+}
+/* .pinkImg {
+  position: absolute;
+  left: 15px;
+  height: 150%;
+  width: 120px;
+  background-color:rgb(255,113,169);
+} */
+#irena {
+  position: absolute;
+  right: 0;
+  opacity: 0.65;
+  width: 45%;
+}
+.mem-form {
+  padding: 1px;
+}
+.mem-form-text {
+  font-family: brushed;
+  margin: 30px;
+}
+#tran {
+  position: absolute;
+  right: 0;
+  width: 45%;
+}
+.createMem {
+  margin: 30px;
 }

@@ -29,9 +29,9 @@ export default function ViewMeeting() {
     <>
       <div className="mt-5 d-flex flex-wrap">
         <div className="d-flex flex-column">
-          <img src={meetingDetails.image} alt={meetingDetails.title} style={{ width: '300px' }} />
+          <img src={meetingDetails.imageUrl} alt={meetingDetails.title} style={{ width: '300px', height: '300px' }} />
         </div>
-        <div className="text-white ms-5 details">
+        <div className="ms-5 details">
           <h5>{meetingDetails.title}</h5>
           <p>Location: {meetingDetails.location}</p>
           <p>Time: {formattedMeetTime}</p>

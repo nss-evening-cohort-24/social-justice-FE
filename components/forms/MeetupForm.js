@@ -69,10 +69,12 @@ function MeetupForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Meetup</h2>
+      <div className="meet-form-text">
+        <h2 className="mt-5">{obj.id ? 'Update' : 'Create'} Meetup</h2>
+      </div>
 
       {/* Title  */}
-      <FloatingLabel controlId="floatingInput1" label="Meetup Title" className="mb-3">
+      <FloatingLabel controlId="floatingInput1" label="Title" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Enter Meetup Title"
@@ -84,10 +86,11 @@ function MeetupForm({ obj }) {
       </FloatingLabel>
 
       {/* Description  */}
-      <FloatingLabel controlId="floatingInput1" label="Description" className="mb-3">
+      <FloatingLabel controlId="floatingTextarea" label="Description" className="mb-3">
         <Form.Control
-          type="text"
-          placeholder="Enter Meetup Description"
+          as="textarea"
+          placeholder="Description of the Meetup"
+          style={{ height: '200px' }}
           name="description"
           value={formInput.description}
           onChange={handleChange}
@@ -96,7 +99,7 @@ function MeetupForm({ obj }) {
       </FloatingLabel>
 
       {/* IMAGE INPUT  */}
-      <FloatingLabel controlId="floatingInput2" label="Meetup Image" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Image" className="mb-3">
         <Form.Control
           type="url"
           placeholder="Enter an image url"
@@ -123,16 +126,16 @@ function MeetupForm({ obj }) {
       <FloatingLabel controlId="floatingInput3" label="Meeting Time" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="Enter Date yyyy-dd-mm"
+          placeholder="YYYY-DD-MM"
           name="meetTime"
-          value={formInput.meetTime || 'yyyy-dd-mm'}
+          value={formInput.meetTime}
           onChange={handleChange}
           required
         />
       </FloatingLabel>
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.id ? 'Update' : 'Create'} Meetup</Button>
+      <Button type="submit" className="newMeet">{obj.id ? 'Update' : 'Create'} Meetup</Button>
     </Form>
   );
 }

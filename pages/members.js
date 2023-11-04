@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getMembers } from '../api/memberData';
 import MemberCard from '../components/cards/MemberCard';
+import posterLayering from '../images/posterLayering.webp';
 // import SearchBar from '../components/search/SearchBar';
 
 function ShowMembers() {
@@ -19,9 +20,13 @@ function ShowMembers() {
 
   return (
     <>
-      <div className="text-center my-4">
+      <img alt="img" src={posterLayering.src} id="postLayer" />
+      <div className="yellowImg"> </div>
+      <div className="greenImg"> </div>
+      <div className="text-end">
+        <div className="header">Members</div>
         <Link href="/member/new" passHref>
-          <Button>Add A Member</Button>
+          <Button className="newMemPG">Add A Member</Button>
         </Link>
         <div className="d-flex flex-wrap">
           {members.map((member) => (
