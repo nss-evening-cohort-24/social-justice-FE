@@ -79,6 +79,24 @@ const getMembersByMeetup = (meetupId, memberId) => new Promise((resolve, reject)
     .catch(reject);
 });
 
+const checkUser = (uid) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:5042/checkuser/${uid}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        resolve(resp.json());
+      } else {
+        resolve(null);
+      }
+    })
+    .catch((error) => reject(error));
+});
+
 export {
   getMembers,
   createMember,
@@ -86,4 +104,5 @@ export {
   getSingleMember,
   updateMember,
   getMembersByMeetup,
+  checkUser,
 };

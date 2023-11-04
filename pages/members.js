@@ -1,14 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { getMembers } from '../api/memberData';
+import { checkUser, getMembers } from '../api/memberData';
 import MemberCard from '../components/cards/MemberCard';
+import CreateMemberBtn from '../components/buttons/CreateMemberBtn';
+import { useAuth } from '../utils/context/authContext';
 import posterLayering from '../images/posterLayering.webp';
 // import SearchBar from '../components/search/SearchBar';
 
 function ShowMembers() {
   const [members, setMembers] = useState([]);
+  const [userMember, setUserMember] = useState();
+
+  const { user } = useAuth();
+  useEffect(() => {
+    checkUser(user.uid)?.then(setUserMember);
+  }, [user.uid]);
 
   const getAllTheMembers = () => {
     getMembers().then(setMembers);
@@ -25,9 +32,7 @@ function ShowMembers() {
       <div className="greenImg"> </div>
       <div className="text-end">
         <div className="header">Members</div>
-        <Link href="/member/new" passHref>
-          <Button className="newMemPG">Add A Member</Button>
-        </Link>
+        {userMember ? null : <Button className="newMemPG" size="sm"><CreateMemberBtn /></Button>}
         <div className="d-flex flex-wrap">
           {members.map((member) => (
             <MemberCard key={member.id} memberObj={member} onUpdate={getAllTheMembers} />

@@ -1,14 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Navbar, Container, Nav, Button,
 } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 import SearchBar from './SearchBar';
+import CreateMemberBtn from './buttons/CreateMemberBtn';
+import { useAuth } from '../utils/context/authContext';
+import { checkUser } from '../api/memberData';
 
 export default function NavBarAuth() {
+  const [member, setMember] = useState();
+
+  const { user } = useAuth();
+  useEffect(() => {
+    checkUser(user.uid)?.then(setMember);
+  }, [user.uid]);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -35,9 +45,7 @@ export default function NavBarAuth() {
             <Link passHref href="/members">
               <Nav.Link className="navMem">Members</Nav.Link>
             </Link>
-            <Link passHref href="/member/new">
-              <Nav.Link className="navNewMem">Create Member</Nav.Link>
-            </Link>
+            {member ? null : <CreateMemberBtn />}
             <SearchBar className="navSearch" />
             <Button className="signOut" onClick={signOut}>Sign Out</Button>
           </Nav>
