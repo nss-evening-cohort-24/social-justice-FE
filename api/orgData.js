@@ -1,9 +1,7 @@
-import { clientCredentials } from '../utils/client';
-
-const endpoint = clientCredentials.databaseURL;
+const dbUrl = 'http://localhost:5042';
 
 const getOrg = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/org.json`, {
+  fetch(`${dbUrl}/organizations`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

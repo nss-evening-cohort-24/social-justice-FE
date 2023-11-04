@@ -54,7 +54,9 @@ function MemberForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Member</h2>
+      <div className="mem-form-text">
+        <h2 className="mt-5">{obj.id ? 'Update' : 'Create'} Member</h2>
+      </div>
 
       {/* firstName INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="First Name" className="mb-3">
@@ -141,7 +143,7 @@ function MemberForm({ obj }) {
       </FloatingLabel> */}
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.id ? 'Update' : 'Create'} Member</Button>
+      <Button type="submit" className="createMem">{obj.id ? 'Update' : 'Create'} Member</Button>
     </Form>
   );
 }

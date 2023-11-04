@@ -5,6 +5,7 @@ import { checkUser, getMembers } from '../api/memberData';
 import MemberCard from '../components/cards/MemberCard';
 import CreateMemberBtn from '../components/buttons/CreateMemberBtn';
 import { useAuth } from '../utils/context/authContext';
+import posterLayering from '../images/posterLayering.webp';
 // import SearchBar from '../components/search/SearchBar';
 
 function ShowMembers() {
@@ -26,8 +27,12 @@ function ShowMembers() {
 
   return (
     <>
-      <div className="text-center my-4">
-        {userMember ? null : <Button size="sm"><CreateMemberBtn /></Button>}
+      <img alt="img" src={posterLayering.src} id="postLayer" />
+      <div className="yellowImg"> </div>
+      <div className="greenImg"> </div>
+      <div className="text-end">
+        <div className="header">Members</div>
+        {userMember ? null : <Button className="newMemPG" size="sm"><CreateMemberBtn /></Button>}
         <div className="d-flex flex-wrap">
           {members.map((member) => (
             <MemberCard key={member.id} memberObj={member} onUpdate={getAllTheMembers} />

@@ -7,6 +7,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { checkUser } from '../../api/memberData';
 import AddMemberToMeetup from '../../components/buttons/AddMemberToMeetup';
 import RemoveMemberMeetup from '../../components/buttons/RemoveMemberFromMeetup';
+import martinHoward from '../../images/martinHoward.jpg';
 
 export default function ViewMeeting() {
   const [meetingDetails, setMeetingDetails] = useState({});
@@ -45,20 +46,22 @@ export default function ViewMeeting() {
 
   return (
     <>
+      <img alt="img" src={martinHoward.src} id="howard" />
       <div className="mt-5 d-flex flex-wrap">
-        <div className="d-flex flex-column">
-          <img src={meetingDetails?.image} alt={meetingDetails?.title} style={{ width: '300px' }} />
+        <div className="img d-flex flex-column">
+          <img src={meetingDetails?.imageUrl} alt={meetingDetails?.title} style={{ width: '300px', height: '300px' }} />
         </div>
-        <div className="text-white ms-5 details">
-          <h5>{meetingDetails?.title}</h5>
-          <p>Location: {meetingDetails?.location}</p>
+        <div className="ms-5 details">
+          <h3>{meetingDetails.title}</h3>
+          <br />
+          <p>Location: {meetingDetails.location}</p>
           <p>Time: {formattedMeetTime}</p>
-          <p>Attending So Far: {meetingDetails?.attending}</p>
-          <p>Created At: {formattedCreateTime}</p>
+          <p>Attending So Far: {meetingDetails.attending}</p>
           <p>
-            Description: <br />
-            {meetingDetails?.description}
+            What to Know: <br />
+            {meetingDetails.description}
           </p>
+          <p>Created At: {formattedCreateTime}</p>
           <hr />
         </div>
       </div>
