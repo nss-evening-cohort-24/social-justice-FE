@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleMember } from '../../api/memberData';
+import sideStep from '../../images/sideStep.jpg';
 
 export default function ViewMember() {
   const [memberDetails, setMemberDetails] = useState({});
@@ -23,20 +24,23 @@ export default function ViewMember() {
   const formattedMemberTime = formatDate(joinedSince);
 
   return (
-    <div className="mt-5 d-flex flex-wrap">
-      <div className="img d-flex flex-column">
-        <img src={memberDetails.imageUrl} alt={memberDetails.email} style={{ width: '300px' }} />
+    <>
+      <img alt="img" src={sideStep.src} id="paint" />
+      <div className="mt-5 d-flex flex-wrap">
+        <div className="img d-flex flex-column">
+          <img src={memberDetails.imageUrl} alt={memberDetails.email} style={{ width: '300px' }} />
+        </div>
+        <div className="text-black ms-5 details">
+          <h3>
+            {memberDetails.firstName} {memberDetails.lastName}
+          </h3>
+          <br />
+          <p>Email: {memberDetails.email}</p>
+          <p>Phone: {memberDetails.phone}</p>
+          <p>Member Since: {formattedMemberTime}</p>
+          <hr />
+        </div>
       </div>
-      <div className="text-black ms-5 details">
-        <h3>
-          {memberDetails.firstName} {memberDetails.lastName}
-        </h3>
-        <br />
-        <p>Email: {memberDetails.email}</p>
-        <p>Phone: {memberDetails.phone}</p>
-        <p>Member Since: {formattedMemberTime}</p>
-        <hr />
-      </div>
-    </div>
+    </>
   );
 }
