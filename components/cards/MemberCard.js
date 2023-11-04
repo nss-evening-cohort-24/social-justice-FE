@@ -9,7 +9,7 @@ import { deleteMember } from '../../api/memberData';
 function MemberCard({ memberObj, onUpdate }) {
   const deleteThisMember = () => {
     if (window.confirm(`Delete ${memberObj.email}?`)) {
-      deleteMember(memberObj.id).then(() => onUpdate());
+      deleteMember(memberObj.id).then(() => onUpdate()).then(() => window.location.reload());
     }
   };
 
@@ -42,7 +42,7 @@ MemberCard.propTypes = {
     phone: PropTypes.string,
     imageUrl: PropTypes.string,
     memberSince: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

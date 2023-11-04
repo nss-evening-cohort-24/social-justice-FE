@@ -47,7 +47,7 @@ function MemberForm({ obj }) {
       console.log('member payload:', payload);
       createMember(payload)
         .then(() => {
-          router.push('/members');
+          router.push('/members').then(() => window.location.reload());
         });
     }
   };

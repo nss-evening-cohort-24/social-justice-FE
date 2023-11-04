@@ -58,3 +58,12 @@ a.nav-link {
   align-items: end;
   margin-left: 100px;
 }
+
+.table th,
+.table td {
+  padding: 10px; 
+}
+
+.cell {
+  padding: 10px;
+}
